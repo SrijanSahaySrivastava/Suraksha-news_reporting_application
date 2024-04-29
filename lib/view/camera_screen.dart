@@ -84,37 +84,20 @@ class _CameraScreenState extends State<CameraScreen> {
     }
   }
 
+  Future<String> getLocalPath() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
   Future<void> uploadImage(File imageFile, String user) async {
-    var request = http.MultipartRequest(
-      'POST',
-      Uri.parse(
-          'http://ec2-43-204-100-197.ap-south-1.compute.amazonaws.com:3000/upload'),
-    );
-
-    request.files
-        .add(await http.MultipartFile.fromPath('photo', imageFile.path));
-
     try {
-      var streamedResponse = await request.send();
-      var response = await http.Response.fromStream(streamedResponse);
+      final path = await getLocalPath();
+      final localImageFile = File('$path/$user.jpg');
+      await localImageFile.writeAsBytes(await imageFile.readAsBytes());
 
-      if (response.statusCode != 200) {
-        throw Exception('Failed to upload image: ${response.body}');
-      }
-
-      var responseData = response.body;
-      print('Signed URL: $responseData');
-      var position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-      _webSocketService.sendImageData(
-        responseData,
-        position.latitude.toString(),
-        position.longitude.toString(),
-        user,
-      );
+      print('Image saved locally at: ${localImageFile.path}');
     } catch (e) {
-      print('Error uploading image: $e');
+      print('Error saving image locally: $e');
     }
   }
 
@@ -201,7 +184,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NewsScreen(user: widget.user),
+                        builder: (context) => NewsScreen(),
                       ));
                 },
                 textstyle: const TextStyle(

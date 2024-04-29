@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => NewsScreen(user: email),
+          builder: (context) => NewsScreen(),
         ),
       );
     }
@@ -46,51 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _rememberMe = newValue ?? false;
     });
-  }
-
-  Future<void> _performLogin() async {
-    final response = await http.post(
-      Uri.parse(
-          'http://ec2-13-201-123-112.ap-south-1.compute.amazonaws.com:3000/signIn'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'email': _email,
-        'password': _password,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      print('Login successful');
-      Fluttertoast.showToast(
-        msg: "Successfully logged in. Redirecting to News Screen.",
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 1,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-      if (_rememberMe) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('email', _email);
-      }
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => NewsScreen(user: _email),
-        ),
-      );
-    } else {
-      print('Login failed with status code: ${response.statusCode}');
-      // Add a toast for error
-      Fluttertoast.showToast(
-        msg: "Login failed. Please try again.",
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 1,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-    }
   }
 
   @override
@@ -192,8 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => NewsScreen(user: "respi")),
+                    MaterialPageRoute(builder: (context) => NewsScreen()),
                   );
                 },
                 textstyle: const TextStyle(

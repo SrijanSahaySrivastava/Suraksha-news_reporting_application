@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 
 class ImageCard extends StatelessWidget {
   final String imageUrl;
-  String description;
-  int sentiment;
+  final String title;
+  final String description;
 
-  ImageCard({
-    Key? key,
+  const ImageCard({
+    super.key,
     required this.imageUrl,
+    required this.title,
     required this.description,
-    required this.sentiment,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    description = description.length > 100
-        ? '${description.substring(0, 100)}...'
-        : description;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
@@ -25,7 +22,7 @@ class ImageCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.0),
         child: SizedBox(
           width: double.infinity,
-          height: 300,
+          height: 200,
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -39,38 +36,9 @@ class ImageCard extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      const Color.fromARGB(255, 0, 0, 0).withOpacity(0.0),
-                      const Color.fromARGB(0, 158, 158, 158).withOpacity(1.0),
+                      Colors.grey.withOpacity(0.0),
+                      Colors.grey.withOpacity(1.0),
                     ],
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 10,
-                top: 10,
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: [
-                      Colors.red,
-                      Colors.orange,
-                      Colors.yellow,
-                      Colors.green,
-                      Colors.blue,
-                      Colors.purple,
-                    ][sentiment],
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '$sentiment',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                 ),
               ),

@@ -25,7 +25,7 @@ class test_send_data extends StatelessWidget {
         LoginScreen.id: (context) => const LoginScreen(),
         CameraScreen.id: (context) => CameraScreen(cameras: cameras, user: ""),
         SignUpScreen.id: (context) => const SignUpScreen(),
-        NewsScreen.id: (context) => const NewsScreen(user: ""),
+        NewsScreen.id: (context) => const NewsScreen(),
       },
     );
   }

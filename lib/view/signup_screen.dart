@@ -25,49 +25,6 @@ class _SignUpState extends State<SignUpScreen> {
   String _lastName = '';
   String _mobileNumber = '';
 
-  Future<void> _performSignUp() async {
-    final response = await http.post(
-      Uri.parse(
-          'http://ec2-13-201-123-112.ap-south-1.compute.amazonaws.com:3000/signUp'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'email': _email,
-        'firstname': _firstName,
-        'lastname': _lastName,
-        'MobileNo': _mobileNumber,
-        'password': _password,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      print('SignUp successful');
-      Fluttertoast.showToast(
-        msg: "Successfully Signed Up. Redirecting to News Screen.",
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 1,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => NewsScreen(user: _email),
-        ),
-      );
-    } else {
-      print('SignUp failed with status code: ${response.statusCode}');
-      Fluttertoast.showToast(
-        msg: "SignUp failed. Please try again.",
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 1,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-    }
-  }
-
   void _onRememberMeChanged(bool? newValue) {
     setState(() {
       _rememberMe = newValue ?? false;
@@ -198,7 +155,12 @@ class _SignUpState extends State<SignUpScreen> {
                 label: 'SIGN UP',
                 colour: Colors.black,
                 onPressed: () {
-                  _performSignUp();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewsScreen(),
+                    ),
+                  );
                 },
                 textstyle: const TextStyle(
                   color: Colors.white,
