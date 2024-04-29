@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_send_data/widget/buttonWidget.dart';
 import 'package:test_send_data/widget/imageCard.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -31,6 +32,81 @@ class _NewsScreenState extends State<NewsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('News Screen'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(192, 207, 205, 205),
+              ),
+              child: Card(
+                margin: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.account_circle,
+                        size: 50,
+                      ),
+                      Text(
+                        'Hey,!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: buttonWidget(
+                label: 'Report News',
+                colour: Colors.black,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                textstyle: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                padding: EdgeInsets.zero,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: buttonWidget(
+                label: 'Latest News',
+                colour: Colors.black,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewsScreen(),
+                      ));
+                },
+                textstyle: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                padding: EdgeInsets.zero,
+              ),
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
