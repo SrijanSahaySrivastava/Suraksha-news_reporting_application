@@ -44,7 +44,7 @@ class WebSocketService {
 
 class CameraScreen extends StatefulWidget {
   static const String id = 'camera_screen';
-  String user = "shashwat123student@gmail.com";
+  String user = "";
   CameraScreen({required this.cameras, Key? key, required this.user})
       : super(key: key);
   final List<CameraDescription> cameras;

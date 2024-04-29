@@ -189,7 +189,13 @@ class _LoginScreenState extends State<LoginScreen> {
               buttonWidget(
                 label: 'LOG IN',
                 colour: Colors.black,
-                onPressed: _performLogin,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NewsScreen(user: "respi")),
+                  );
+                },
                 textstyle: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

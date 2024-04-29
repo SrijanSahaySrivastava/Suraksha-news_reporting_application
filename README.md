@@ -1,6 +1,4 @@
-# test_send_data
-
-A new Flutter project.
+# Suraksha News Reporting and Live new Feed Application
 
 ## Getting Started
 

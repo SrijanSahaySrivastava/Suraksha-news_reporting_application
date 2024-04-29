@@ -23,11 +23,9 @@ class test_send_data extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         LoginScreen.id: (context) => const LoginScreen(),
-        CameraScreen.id: (context) => CameraScreen(
-            cameras: cameras, user: "shashwat123student@gmail.com"),
+        CameraScreen.id: (context) => CameraScreen(cameras: cameras, user: ""),
         SignUpScreen.id: (context) => const SignUpScreen(),
-        NewsScreen.id: (context) =>
-            const NewsScreen(user: "shashwat123student@gmail.com"),
+        NewsScreen.id: (context) => const NewsScreen(user: ""),
       },
     );
   }
